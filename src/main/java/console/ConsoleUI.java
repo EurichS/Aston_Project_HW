@@ -1,148 +1,127 @@
 package console;
 
-import dao.UserDao;
-import entity.UserEntity;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
 /**
- * @ Класс для общения с пользователем:
- * отображает меню, обрабатывает команды.
- * По команде пользователя вызывает соответствующие методы
- * userDAO и отображает результаты их выполнения
+ * Главный контроллер пользовательского интерфейса (UI), управляющий жизненным циклом приложения.
+ * <p>
+ * Класс координирует работу между {@link Viewer} (отображение),
+ * {@link Validator} (проверка данных) и {@link ViewerDAO} (логика),
+ * обрабатывая ввод пользователя в бесконечном цикле до команды выхода.
  */
 public class ConsoleUI {
-    private static final Logger logger = LoggerFactory.getLogger(ConsoleUI.class);
-    private final UserDao userDao = new UserDao();
+    private final Viewer viewer = new Viewer();
+    private final Validator validator = new Validator();
+    private final ViewerDAO viewerDAO = new ViewerDAO();
     private final Scanner scanner = new Scanner(System.in);
 
+    /**
+     * Запускает основной цикл обработки команд.
+     * <p>
+     * Метод отображает меню и ожидает ввода пользователя. Цикл продолжается
+     * до тех пор, пока не будет выбрана команда завершения работы.
+     */
     public void start() {
         boolean running = true;
         while (running) {
-            showMenu();
-            int choice = getUserChoice();
+            viewer.showMenu();
+            String choice = scanner.nextLine();
 
             switch (choice) {
-                case 1 -> createUser();
-                case 2 -> readUser();
-                case 3 -> showAllUsers();
-                case 4 -> updateUser();
-                case 5 -> removeUser();
-                case 6 -> {
-                    running = false;
-                    logger.info("Завершение работы приложения");
-                }
-                default -> System.out.println("Неверный выбор. Попробуйте снова.");
+                case "1" -> createUser();
+                case "2" -> readUser();
+                case "3" -> viewer.showUsers(viewerDAO.getAll());
+                case "4" -> updateUser();
+                case "5" -> removeUser();
+                case "6" -> running = false;
+                default -> viewer.showMessage("Неверный выбор.");
             }
         }
         scanner.close();
     }
 
-    private void showMenu() {
-        System.out.println("Выберите действие: ");
-        System.out.println("1. Создать пользователя");
-        System.out.println("2. Найти пользователя по ID");
-        System.out.println("3. Показать всех пользователей");
-        System.out.println("4. Обновить пользователя");
-        System.out.println("5. Удалить пользователя");
-        System.out.println("6. Выход");
-    }
-
-    private int getUserChoice() {
-        try {
-            return Integer.parseInt(scanner.nextLine());
-        } catch (NumberFormatException e) {
-            return -1;
-        }
-    }
-
+    /**
+     * Запускает пошаговый процесс создания нового пользователя.
+     * <p>
+     * Метод последовательно запрашивает имя, email и возраст,
+     * выполняя валидацию каждого поля. В случае ошибки ввод прерывается
+     * с выводом соответствующего уведомления.
+     */
     private void createUser() {
-        try {
-            System.out.print("Имя: ");
-            String name = scanner.nextLine();
-            System.out.print("Email: ");
-            String email = scanner.nextLine();
-            System.out.print("Возраст: ");
-            Integer age = Integer.parseInt(scanner.nextLine());
-
-            UserEntity userEntity = new UserEntity(name, email, age);
-            userDao.create(userEntity);
-            System.out.println("Пользователь успешно создан!");
-        } catch (Exception e) {
-            System.out.println("Ошибка при создании пользователя: " + e.getMessage());
+        viewer.showMessage("Создание нового пользователя");
+        viewer.showMessage("Имя: ");
+        Optional<String> nameOpt = validator.validateString(scanner.nextLine());
+        if (nameOpt.isEmpty()) {
+            viewer.showEntryError("Имя не может быть пустым.");
+            return;
         }
+        viewer.showMessage("Email: ");
+        Optional<String> emailOpt = validator.validateEmail(scanner.nextLine());
+        if (emailOpt.isEmpty()) {
+            viewer.showEntryError("Некорректный формат Email.");
+            return;
+        }
+        viewer.showMessage("Возраст: ");
+        Optional<Integer> ageOpt = validator.parseAge(scanner.nextLine());
+        if (ageOpt.isEmpty()) {
+            viewer.showEntryError("Возраст должен быть числом от 0 до 120.");
+            return;
+        }
+        viewerDAO.saveUser(nameOpt.get(), emailOpt.get(), ageOpt.get());
+        viewer.showMessage("Пользователь успешно сохранен.");
     }
 
+    /**
+     * Инициирует поиск пользователя по его идентификатору.
+     * <p>
+     * Запрашивает ID, проверяет его формат и, если пользователь найден,
+     * передает его данные в {@link Viewer} для отображения.
+     */
     private void readUser() {
-        try {
-            System.out.print("Введите ID пользователя: ");
-            Long id = Long.parseLong(scanner.nextLine());
-            Optional<UserEntity> user = userDao.read(id);
-            if (user.isPresent()) {
-                System.out.println(user.get());
-            } else {
-                System.out.println("Пользователь не найден");
-            }
-        } catch (Exception e) {
-            System.out.println("Ошибка: " + e.getMessage());
-        }
+        viewer.showMessage("Введите ID: ");
+        validator.parseId(scanner.nextLine()).ifPresentOrElse(
+                id -> viewerDAO.findById(id).ifPresentOrElse(viewer::showUser,
+                        () -> viewer.showMessage("Пользователь не найден.")),
+                () -> viewer.showEntryError("Некорректный ID.")
+        );
     }
 
-    private void showAllUsers() {
-        try {
-            List<UserEntity> userEntities = userDao.findAll();
-            if (userEntities.isEmpty()) {
-                System.out.println("Пользователи не найдены");
-            } else {
-                userEntities.forEach(System.out::println);
-            }
-        } catch (Exception e) {
-            System.out.println("Ошибка при получении списка пользователей: " + e.getMessage());
-        }
-    }
-
+    /**
+     * Выполняет процедуру обновления данных существующего пользователя.
+     * <p>
+     * Позволяет выборочно изменить имя или email. Если при вводе
+     * оставить поле пустым, текущее значение сохраняется.
+     */
     private void updateUser() {
-        try {
-            System.out.print("Введите ID пользователя для обновления: ");
-            Long id = Long.parseLong(scanner.nextLine());
-            Optional<UserEntity> userOpt = userDao.read(id);
-
-            if (userOpt.isPresent()) {
-                UserEntity userEntity = userOpt.get();
-                System.out.print("Новое имя (текущее: " + userEntity.getName() + "): ");
+        viewer.showMessage("Введите ID пользователя для редактирования: ");
+        validator.parseId(scanner.nextLine()).ifPresent(id -> {
+            viewerDAO.findById(id).ifPresentOrElse(user -> {
+                viewer.showMessage("Новое имя (" + user.getName() + "): ");
                 String name = scanner.nextLine();
-                if (!name.isEmpty()) userEntity.setName(name);
-
-                System.out.print("Новый email (текущий: " + userEntity.getEmail() + "): ");
+                if (!name.isBlank()) user.setName(name);
+                viewer.showMessage("Новый email (" + user.getEmail() + "): ");
                 String email = scanner.nextLine();
-                if (!email.isEmpty()) userEntity.setEmail(email);
-
-                System.out.print("Новый возраст (текущий: " + userEntity.getAge() + "): ");
-                String ageStr = scanner.nextLine();
-                if (!ageStr.isEmpty()) userEntity.setAge(Integer.parseInt(ageStr));
-
-                userDao.update(userEntity);
-                System.out.println("Пользователь успешно обновлён!");
-            } else {
-                System.out.println("Пользователь не найден");
-            }
-        } catch (Exception e) {
-            System.out.println("Ошибка при обновлении пользователя: " + e.getMessage());
-        }
+                if (!email.isBlank()) user.setEmail(email);
+                viewerDAO.update(user);
+                viewer.showMessage("Данные обновлены.");
+            }, () -> viewer.showMessage("Пользователь не найден."));
+        });
     }
 
+    /**
+     * Удаляет пользователя из системы по введенному ID.
+     * <p>
+     * Выполняет парсинг идентификатора и делегирует удаление слою доступа к данным.
+     */
     private void removeUser() {
-        try {
-            System.out.print("Введите ID пользователя для удаления: ");
-            Long id = Long.parseLong(scanner.nextLine());
-            userDao.remove(id);
-            System.out.println("Пользователь удалён!");
-        } catch (Exception e) {
-            System.out.println("Ошибка при удалении пользователя: " + e.getMessage());
-        }
+        viewer.showMessage("Введите ID для удаления: ");
+        validator.parseId(scanner.nextLine()).ifPresentOrElse(
+                id -> {
+                    viewerDAO.delete(id);
+                    viewer.showMessage("Пользователь удален (если он существовал).");
+                },
+                () -> viewer.showEntryError("Некорректный ID.")
+        );
     }
 }
