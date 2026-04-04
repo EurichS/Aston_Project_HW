@@ -1,7 +1,7 @@
 package console;
 
 import dao.UserDao;
-import entity.User;
+import entity.UserEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -69,8 +69,8 @@ public class ConsoleUI {
             System.out.print("Возраст: ");
             Integer age = Integer.parseInt(scanner.nextLine());
 
-            User user = new User(name, email, age);
-            userDao.create(user);
+            UserEntity userEntity = new UserEntity(name, email, age);
+            userDao.create(userEntity);
             System.out.println("Пользователь успешно создан!");
         } catch (Exception e) {
             System.out.println("Ошибка при создании пользователя: " + e.getMessage());
@@ -81,7 +81,7 @@ public class ConsoleUI {
         try {
             System.out.print("Введите ID пользователя: ");
             Long id = Long.parseLong(scanner.nextLine());
-            Optional<User> user = userDao.read(id);
+            Optional<UserEntity> user = userDao.read(id);
             if (user.isPresent()) {
                 System.out.println(user.get());
             } else {
@@ -94,11 +94,11 @@ public class ConsoleUI {
 
     private void showAllUsers() {
         try {
-            List<User> users = userDao.findAll();
-            if (users.isEmpty()) {
+            List<UserEntity> userEntities = userDao.findAll();
+            if (userEntities.isEmpty()) {
                 System.out.println("Пользователи не найдены");
             } else {
-                users.forEach(System.out::println);
+                userEntities.forEach(System.out::println);
             }
         } catch (Exception e) {
             System.out.println("Ошибка при получении списка пользователей: " + e.getMessage());
@@ -109,23 +109,23 @@ public class ConsoleUI {
         try {
             System.out.print("Введите ID пользователя для обновления: ");
             Long id = Long.parseLong(scanner.nextLine());
-            Optional<User> userOpt = userDao.read(id);
+            Optional<UserEntity> userOpt = userDao.read(id);
 
             if (userOpt.isPresent()) {
-                User user = userOpt.get();
-                System.out.print("Новое имя (текущее: " + user.getName() + "): ");
+                UserEntity userEntity = userOpt.get();
+                System.out.print("Новое имя (текущее: " + userEntity.getName() + "): ");
                 String name = scanner.nextLine();
-                if (!name.isEmpty()) user.setName(name);
+                if (!name.isEmpty()) userEntity.setName(name);
 
-                System.out.print("Новый email (текущий: " + user.getEmail() + "): ");
+                System.out.print("Новый email (текущий: " + userEntity.getEmail() + "): ");
                 String email = scanner.nextLine();
-                if (!email.isEmpty()) user.setEmail(email);
+                if (!email.isEmpty()) userEntity.setEmail(email);
 
-                System.out.print("Новый возраст (текущий: " + user.getAge() + "): ");
+                System.out.print("Новый возраст (текущий: " + userEntity.getAge() + "): ");
                 String ageStr = scanner.nextLine();
-                if (!ageStr.isEmpty()) user.setAge(Integer.parseInt(ageStr));
+                if (!ageStr.isEmpty()) userEntity.setAge(Integer.parseInt(ageStr));
 
-                userDao.update(user);
+                userDao.update(userEntity);
                 System.out.println("Пользователь успешно обновлён!");
             } else {
                 System.out.println("Пользователь не найден");

@@ -1,22 +1,55 @@
 package dao;
 
-import entity.User;
-
+import entity.UserEntity;
 import java.util.List;
 import java.util.Optional;
 
 /**
- * @ Абстракция с CRUD-операциями
- * и отображением всей БД.
+ * Интерфейс DAO (Data Access Object) для работы с сущностью {@link UserEntity}.
+ * Предоставляет базовый набор CRUD‑операций и методы для доступа к данным пользователей.
+ *
+ * @see UserEntity
  */
 public interface EntityDAO {
-    void create(User user);
 
-    Optional<User> read(Long id);
+    /**
+     * Создаёт новую запись пользователя в базе данных.
+     *
+     * @param userEntity объект пользователя, который необходимо сохранить;
+     *        не должен быть {@code null}
+     */
+    void create(UserEntity userEntity);
 
-    void update(User user);
+    /**
+     * Получает объект пользователя по его идентификатору.
+     *
+     * @param id уникальный идентификатор пользователя; должен быть положительным числом
+     * @return {@link Optional} содержащий объект {@link UserEntity}, если пользователь
+     *         с указанным ID найден; пустой {@link Optional}, если пользователь не найден
+     */
+    Optional<UserEntity> read(Long id);
 
+    /**
+     * Обновляет существующую запись пользователя в базе данных.
+     *
+     * @param userEntity объект пользователя с обновлёнными данными; не должен быть {@code null},
+     *        а поле ID должно соответствовать существующему пользователю
+     */
+    void update(UserEntity userEntity);
+
+    /**
+     * Удаляет запись пользователя из базы данных по его идентификатору.
+     *
+     * @param id уникальный идентификатор пользователя, которого необходимо удалить;
+     *        должен быть положительным числом
+     */
     void remove(Long id);
 
-    List<User> findAll();
+    /**
+     * Получает список всех пользователей, хранящихся в базе данных.
+     *
+     * @return список объектов {@link UserEntity}; пустой список, если пользователи
+     *         в базе данных отсутствуют
+     */
+    List<UserEntity> findAll();
 }
