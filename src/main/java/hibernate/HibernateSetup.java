@@ -1,4 +1,4 @@
-package dao;
+package hibernate;
 
 import entity.UserEntity;
 import lombok.NoArgsConstructor;

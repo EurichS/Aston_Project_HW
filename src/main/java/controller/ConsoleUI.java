@@ -1,4 +1,8 @@
-package console;
+package controller;
+
+import console.Validator;
+import console.Viewer;
+import dao.ViewerDAO;
 
 import java.util.Optional;
 import java.util.Scanner;

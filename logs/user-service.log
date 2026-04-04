@@ -46,9 +46,9 @@ java.lang.IllegalStateException: Cannot get a connection as the driver manager i
 	at org.hibernate.boot.MetadataSources.buildMetadata(MetadataSources.java:241)
 	at hibernate.HibernateUtil.buildSessionFactory(HibernateUtil.java:17)
 	at hibernate.HibernateUtil.<clinit>(HibernateUtil.java:9)
-	at dao.UserDao.save(UserDao.java:18)
-	at console.ConsoleUI.createUser(ConsoleUI.java:68)
-	at console.ConsoleUI.start(ConsoleUI.java:24)
+	at dao.UserDAO.save(UserDao.java:18)
+	at controller.ConsoleUI.createUser(ConsoleUI.java:68)
+	at controller.ConsoleUI.start(ConsoleUI.java:24)
 	at Application.main(Application.java:9)
 2026-03-27 06:33:15 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
 2026-03-27 07:10:47 [main] INFO  org.hibernate.orm.core - HHH000001: Hibernate ORM core version 8.0.0.Alpha1
@@ -99,9 +99,9 @@ java.lang.IllegalStateException: Cannot get a connection as the driver manager i
 	at org.hibernate.boot.MetadataSources.buildMetadata(MetadataSources.java:241)
 	at hibernate.HibernateUtil.buildSessionFactory(HibernateUtil.java:17)
 	at hibernate.HibernateUtil.<clinit>(HibernateUtil.java:9)
-	at dao.UserDao.save(UserDao.java:18)
-	at console.ConsoleUI.createUser(ConsoleUI.java:68)
-	at console.ConsoleUI.start(ConsoleUI.java:24)
+	at dao.UserDAO.save(UserDao.java:18)
+	at controller.ConsoleUI.createUser(ConsoleUI.java:68)
+	at controller.ConsoleUI.start(ConsoleUI.java:24)
 	at Application.main(Application.java:9)
 2026-03-27 07:10:48 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
 2026-03-27 07:47:12 [main] INFO  org.hibernate.orm.core - HHH000001: Hibernate ORM core version 8.0.0.Alpha1
@@ -152,9 +152,9 @@ java.lang.IllegalStateException: Cannot get a connection as the driver manager i
 	at org.hibernate.boot.MetadataSources.buildMetadata(MetadataSources.java:241)
 	at hibernate.HibernateUtil.buildSessionFactory(HibernateUtil.java:17)
 	at hibernate.HibernateUtil.<clinit>(HibernateUtil.java:9)
-	at dao.UserDao.save(UserDao.java:18)
-	at console.ConsoleUI.createUser(ConsoleUI.java:68)
-	at console.ConsoleUI.start(ConsoleUI.java:24)
+	at dao.UserDAO.save(UserDao.java:18)
+	at controller.ConsoleUI.createUser(ConsoleUI.java:68)
+	at controller.ConsoleUI.start(ConsoleUI.java:24)
 	at Application.main(Application.java:9)
 2026-03-27 07:47:12 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
 2026-03-28 11:04:29 [main] INFO  org.hibernate.orm.core - HHH000001: Hibernate ORM core version 8.0.0.Alpha1
@@ -205,9 +205,9 @@ java.lang.IllegalStateException: Cannot get a connection as the driver manager i
 	at org.hibernate.boot.MetadataSources.buildMetadata(MetadataSources.java:241)
 	at hibernate.HibernateUtil.buildSessionFactory(HibernateUtil.java:17)
 	at hibernate.HibernateUtil.<clinit>(HibernateUtil.java:9)
-	at dao.UserDao.save(UserDao.java:18)
-	at console.ConsoleUI.createUser(ConsoleUI.java:68)
-	at console.ConsoleUI.start(ConsoleUI.java:24)
+	at dao.UserDAO.save(UserDao.java:18)
+	at controller.ConsoleUI.createUser(ConsoleUI.java:68)
+	at controller.ConsoleUI.start(ConsoleUI.java:24)
 	at Application.main(Application.java:9)
 2026-03-28 11:04:29 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
 2026-03-28 17:07:33 [main] INFO  org.hibernate.orm.core - HHH000001: Hibernate ORM core version 8.0.0.Alpha1
@@ -266,9 +266,9 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
 	at org.hibernate.boot.internal.MetadataImpl.buildSessionFactory(MetadataImpl.java:72)
 	at hibernate.HibernateUtil.buildSessionFactory(HibernateUtil.java:18)
 	at hibernate.HibernateUtil.<clinit>(HibernateUtil.java:9)
-	at dao.UserDao.create(UserDao.java:18)
-	at console.ConsoleUI.createUser(ConsoleUI.java:68)
-	at console.ConsoleUI.start(ConsoleUI.java:24)
+	at dao.UserDAO.create(UserDao.java:18)
+	at controller.ConsoleUI.createUser(ConsoleUI.java:68)
+	at controller.ConsoleUI.start(ConsoleUI.java:24)
 	at Application.main(Application.java:9)
 Caused by: org.postgresql.util.PSQLException: ОШИБКА: схема "userEntities" не существует
   Позиция: 20
@@ -388,7 +388,7 @@ Caused by: org.postgresql.util.PSQLException: ОШИБКА: схема "userEnti
 	Maximum pool size: 20
 2026-03-28 17:40:21 [main] INFO  org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
 2026-03-28 17:40:21 [main] INFO  hibernate.HibernateUtil - Hibernate SessionFactory created successfully
-2026-03-28 17:40:25 [main] INFO  console.ConsoleUI - Завершение работы приложения
+2026-03-28 17:40:25 [main] INFO  controller.ConsoleUI - Завершение работы приложения
 2026-03-28 17:42:19 [main] INFO  org.hibernate.orm.core - HHH000001: Hibernate ORM core version 8.0.0.Alpha1
 2026-03-28 17:42:19 [main] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
 2026-03-28 17:42:20 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
@@ -471,9 +471,9 @@ org.hibernate.exception.SQLGrammarException: JDBC exception executing SQL [ОШ�
 	at org.hibernate.internal.SessionImpl.find(SessionImpl.java:151)
 	at org.hibernate.internal.AbstractSharedSessionContract.get(AbstractSharedSessionContract.java:480)
 	at org.hibernate.internal.SessionImpl.get(SessionImpl.java:151)
-	at dao.UserDao.read(UserDao.java:35)
-	at console.ConsoleUI.readUser(ConsoleUI.java:79)
-	at console.ConsoleUI.start(ConsoleUI.java:25)
+	at dao.UserDAO.read(UserDao.java:35)
+	at controller.ConsoleUI.readUser(ConsoleUI.java:79)
+	at controller.ConsoleUI.start(ConsoleUI.java:25)
 	at Application.main(Application.java:9)
 Caused by: org.postgresql.util.PSQLException: ОШИБКА: столбец u1_0.createdat не существует
   Подсказка: Возможно, предполагалась ссылка на столбец "u1_0.created_at".
@@ -487,7 +487,7 @@ Caused by: org.postgresql.util.PSQLException: ОШИБКА: столбец u1_0.
 	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:139)
 	at org.hibernate.sql.results.jdbc.internal.DeferredResultSetAccess.executeQuery(DeferredResultSetAccess.java:273)
 	... 40 common frames omitted
-2026-03-28 17:56:41 [main] INFO  console.ConsoleUI - Завершение работы приложения
+2026-03-28 17:56:41 [main] INFO  controller.ConsoleUI - Завершение работы приложения
 2026-03-28 17:57:06 [main] INFO  org.hibernate.orm.core - HHH000001: Hibernate ORM core version 8.0.0.Alpha1
 2026-03-28 17:57:07 [main] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
 2026-03-28 17:57:07 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
@@ -553,9 +553,9 @@ org.hibernate.exception.SQLGrammarException: JDBC exception executing SQL [ОШ�
 	at org.hibernate.internal.SessionImpl.find(SessionImpl.java:151)
 	at org.hibernate.internal.AbstractSharedSessionContract.get(AbstractSharedSessionContract.java:480)
 	at org.hibernate.internal.SessionImpl.get(SessionImpl.java:151)
-	at dao.UserDao.read(UserDao.java:35)
-	at console.ConsoleUI.readUser(ConsoleUI.java:79)
-	at console.ConsoleUI.start(ConsoleUI.java:25)
+	at dao.UserDAO.read(UserDao.java:35)
+	at controller.ConsoleUI.readUser(ConsoleUI.java:79)
+	at controller.ConsoleUI.start(ConsoleUI.java:25)
 	at Application.main(Application.java:9)
 Caused by: org.postgresql.util.PSQLException: ОШИБКА: столбец u1_0.createdat не существует
   Подсказка: Возможно, предполагалась ссылка на столбец "u1_0.created_at".
@@ -634,9 +634,9 @@ org.hibernate.exception.SQLGrammarException: JDBC exception executing SQL [ОШ�
 	at org.hibernate.internal.SessionImpl.find(SessionImpl.java:151)
 	at org.hibernate.internal.AbstractSharedSessionContract.get(AbstractSharedSessionContract.java:480)
 	at org.hibernate.internal.SessionImpl.get(SessionImpl.java:151)
-	at dao.UserDao.read(UserDao.java:35)
-	at console.ConsoleUI.readUser(ConsoleUI.java:79)
-	at console.ConsoleUI.start(ConsoleUI.java:25)
+	at dao.UserDAO.read(UserDao.java:35)
+	at controller.ConsoleUI.readUser(ConsoleUI.java:79)
+	at controller.ConsoleUI.start(ConsoleUI.java:25)
 	at Application.main(Application.java:9)
 Caused by: org.postgresql.util.PSQLException: ОШИБКА: столбец u1_0.createdat не существует
   Подсказка: Возможно, предполагалась ссылка на столбец "u1_0.created_at".
@@ -653,7 +653,7 @@ Caused by: org.postgresql.util.PSQLException: ОШИБКА: столбец u1_0.
 2026-03-28 17:58:14 [main] WARN  org.hibernate.orm.jdbc.error - HHH000247: ErrorCode: 0, SQLState: 42703
 2026-03-28 17:58:14 [main] WARN  org.hibernate.orm.jdbc.error - ОШИБКА: столбец "createdat" в таблице "userEntities" не существует
   Позиция: 24
-2026-03-28 17:58:20 [main] INFO  console.ConsoleUI - Завершение работы приложения
+2026-03-28 17:58:20 [main] INFO  controller.ConsoleUI - Завершение работы приложения
 2026-03-28 17:58:58 [main] INFO  org.hibernate.orm.core - HHH000001: Hibernate ORM core version 8.0.0.Alpha1
 2026-03-28 17:58:59 [main] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
 2026-03-28 17:58:59 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
@@ -719,9 +719,9 @@ org.hibernate.exception.SQLGrammarException: JDBC exception executing SQL [ОШ�
 	at org.hibernate.internal.SessionImpl.find(SessionImpl.java:151)
 	at org.hibernate.internal.AbstractSharedSessionContract.get(AbstractSharedSessionContract.java:480)
 	at org.hibernate.internal.SessionImpl.get(SessionImpl.java:151)
-	at dao.UserDao.read(UserDao.java:35)
-	at console.ConsoleUI.readUser(ConsoleUI.java:79)
-	at console.ConsoleUI.start(ConsoleUI.java:25)
+	at dao.UserDAO.read(UserDao.java:35)
+	at controller.ConsoleUI.readUser(ConsoleUI.java:79)
+	at controller.ConsoleUI.start(ConsoleUI.java:25)
 	at Application.main(Application.java:9)
 Caused by: org.postgresql.util.PSQLException: ОШИБКА: столбец u1_0.createdat не существует
   Подсказка: Возможно, предполагалась ссылка на столбец "u1_0.created_at".
@@ -815,9 +815,9 @@ org.hibernate.exception.SQLGrammarException: JDBC exception executing SQL [ОШ�
 	at org.hibernate.internal.SessionImpl.find(SessionImpl.java:151)
 	at org.hibernate.internal.AbstractSharedSessionContract.get(AbstractSharedSessionContract.java:480)
 	at org.hibernate.internal.SessionImpl.get(SessionImpl.java:151)
-	at dao.UserDao.read(UserDao.java:35)
-	at console.ConsoleUI.readUser(ConsoleUI.java:79)
-	at console.ConsoleUI.start(ConsoleUI.java:25)
+	at dao.UserDAO.read(UserDao.java:35)
+	at controller.ConsoleUI.readUser(ConsoleUI.java:79)
+	at controller.ConsoleUI.start(ConsoleUI.java:25)
 	at Application.main(Application.java:9)
 Caused by: org.postgresql.util.PSQLException: ОШИБКА: отношение "userEntities" не существует
   Позиция: 67
@@ -855,9 +855,9 @@ java.lang.IllegalArgumentException: org.hibernate.query.sqm.UnknownEntityExcepti
 	at org.hibernate.internal.AbstractSharedSessionContract.createQuery(AbstractSharedSessionContract.java:1340)
 	at org.hibernate.internal.SessionImpl.createQuery(SessionImpl.java:151)
 	at org.hibernate.internal.AbstractSharedSessionContract.createQuery(AbstractSharedSessionContract.java:171)
-	at dao.UserDao.findAll(UserDao.java:46)
-	at console.ConsoleUI.showAllUsers(ConsoleUI.java:92)
-	at console.ConsoleUI.start(ConsoleUI.java:26)
+	at dao.UserDAO.findAll(UserDao.java:46)
+	at controller.ConsoleUI.showAllUsers(ConsoleUI.java:92)
+	at controller.ConsoleUI.start(ConsoleUI.java:26)
 	at Application.main(Application.java:9)
 Caused by: org.hibernate.query.sqm.UnknownEntityException: Could not resolve root entity 'userEntities.userEntities'
 	at org.hibernate.query.hql.internal.SemanticQueryBuilder.resolveRootEntity(SemanticQueryBuilder.java:2073)
@@ -948,9 +948,9 @@ org.hibernate.exception.SQLGrammarException: JDBC exception executing SQL [ОШ�
 	at org.hibernate.internal.SessionImpl.find(SessionImpl.java:151)
 	at org.hibernate.internal.AbstractSharedSessionContract.get(AbstractSharedSessionContract.java:480)
 	at org.hibernate.internal.SessionImpl.get(SessionImpl.java:151)
-	at dao.UserDao.read(UserDao.java:35)
-	at console.ConsoleUI.readUser(ConsoleUI.java:79)
-	at console.ConsoleUI.start(ConsoleUI.java:25)
+	at dao.UserDAO.read(UserDao.java:35)
+	at controller.ConsoleUI.readUser(ConsoleUI.java:79)
+	at controller.ConsoleUI.start(ConsoleUI.java:25)
 	at Application.main(Application.java:9)
 Caused by: org.postgresql.util.PSQLException: ОШИБКА: отношение "userEntities" не существует
   Позиция: 67
@@ -971,9 +971,9 @@ java.lang.IllegalArgumentException: org.hibernate.query.sqm.UnknownEntityExcepti
 	at org.hibernate.internal.AbstractSharedSessionContract.createQuery(AbstractSharedSessionContract.java:1340)
 	at org.hibernate.internal.SessionImpl.createQuery(SessionImpl.java:151)
 	at org.hibernate.internal.AbstractSharedSessionContract.createQuery(AbstractSharedSessionContract.java:171)
-	at dao.UserDao.findAll(UserDao.java:46)
-	at console.ConsoleUI.showAllUsers(ConsoleUI.java:92)
-	at console.ConsoleUI.start(ConsoleUI.java:26)
+	at dao.UserDAO.findAll(UserDao.java:46)
+	at controller.ConsoleUI.showAllUsers(ConsoleUI.java:92)
+	at controller.ConsoleUI.start(ConsoleUI.java:26)
 	at Application.main(Application.java:9)
 Caused by: org.hibernate.query.sqm.UnknownEntityException: Could not resolve root entity 'userEntities.userEntities'
 	at org.hibernate.query.hql.internal.SemanticQueryBuilder.resolveRootEntity(SemanticQueryBuilder.java:2073)
@@ -1001,7 +1001,7 @@ Caused by: org.hibernate.query.sqm.UnknownEntityException: Could not resolve roo
 	at org.hibernate.internal.SessionImpl.createSelectionQuery(SessionImpl.java:151)
 	at org.hibernate.internal.AbstractSharedSessionContract.createQuery(AbstractSharedSessionContract.java:1337)
 	... 6 common frames omitted
-2026-03-28 18:05:24 [main] INFO  console.ConsoleUI - Завершение работы приложения
+2026-03-28 18:05:24 [main] INFO  controller.ConsoleUI - Завершение работы приложения
 2026-03-28 18:06:18 [main] INFO  org.hibernate.orm.core - HHH000001: Hibernate ORM core version 8.0.0.Alpha1
 2026-03-28 18:06:19 [main] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
 2026-03-28 18:06:19 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
@@ -1027,9 +1027,9 @@ java.lang.IllegalArgumentException: org.hibernate.query.sqm.UnknownEntityExcepti
 	at org.hibernate.internal.AbstractSharedSessionContract.createQuery(AbstractSharedSessionContract.java:1340)
 	at org.hibernate.internal.SessionImpl.createQuery(SessionImpl.java:151)
 	at org.hibernate.internal.AbstractSharedSessionContract.createQuery(AbstractSharedSessionContract.java:171)
-	at dao.UserDao.findAll(UserDao.java:46)
-	at console.ConsoleUI.showAllUsers(ConsoleUI.java:92)
-	at console.ConsoleUI.start(ConsoleUI.java:26)
+	at dao.UserDAO.findAll(UserDao.java:46)
+	at controller.ConsoleUI.showAllUsers(ConsoleUI.java:92)
+	at controller.ConsoleUI.start(ConsoleUI.java:26)
 	at Application.main(Application.java:9)
 Caused by: org.hibernate.query.sqm.UnknownEntityException: Could not resolve root entity 'userEntities.userEntities'
 	at org.hibernate.query.hql.internal.SemanticQueryBuilder.resolveRootEntity(SemanticQueryBuilder.java:2073)
@@ -1112,9 +1112,9 @@ org.hibernate.PropertyValueException: not-null property references a null or tra
 	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:134)
 	at org.hibernate.internal.SessionImpl.firePersist(SessionImpl.java:653)
 	at org.hibernate.internal.SessionImpl.persist(SessionImpl.java:636)
-	at dao.UserDao.create(UserDao.java:20)
-	at console.ConsoleUI.createUser(ConsoleUI.java:68)
-	at console.ConsoleUI.start(ConsoleUI.java:24)
+	at dao.UserDAO.create(UserDao.java:20)
+	at controller.ConsoleUI.createUser(ConsoleUI.java:68)
+	at controller.ConsoleUI.start(ConsoleUI.java:24)
 	at Application.main(Application.java:9)
 2026-03-28 18:12:14 [main] INFO  org.hibernate.orm.core - HHH000001: Hibernate ORM core version 8.0.0.Alpha1
 2026-03-28 18:12:14 [main] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
@@ -1172,9 +1172,9 @@ org.hibernate.HibernateException: Duplicate row was found and `ASSERT` was speci
 	at org.hibernate.internal.SessionImpl.find(SessionImpl.java:151)
 	at org.hibernate.internal.AbstractSharedSessionContract.get(AbstractSharedSessionContract.java:480)
 	at org.hibernate.internal.SessionImpl.get(SessionImpl.java:151)
-	at dao.UserDao.read(UserDao.java:35)
-	at console.ConsoleUI.readUser(ConsoleUI.java:79)
-	at console.ConsoleUI.start(ConsoleUI.java:25)
+	at dao.UserDAO.read(UserDao.java:35)
+	at controller.ConsoleUI.readUser(ConsoleUI.java:79)
+	at controller.ConsoleUI.start(ConsoleUI.java:25)
 	at Application.main(Application.java:9)
 2026-03-28 18:13:09 [main] ERROR dao.EntityDAO - Ошибка при поиске пользователя по ID:
 org.hibernate.HibernateException: Duplicate row was found and `ASSERT` was specified
@@ -1214,20 +1214,20 @@ org.hibernate.HibernateException: Duplicate row was found and `ASSERT` was speci
 	at org.hibernate.internal.SessionImpl.find(SessionImpl.java:151)
 	at org.hibernate.internal.AbstractSharedSessionContract.get(AbstractSharedSessionContract.java:480)
 	at org.hibernate.internal.SessionImpl.get(SessionImpl.java:151)
-	at dao.UserDao.read(UserDao.java:35)
-	at console.ConsoleUI.readUser(ConsoleUI.java:79)
-	at console.ConsoleUI.start(ConsoleUI.java:25)
+	at dao.UserDAO.read(UserDao.java:35)
+	at controller.ConsoleUI.readUser(ConsoleUI.java:79)
+	at controller.ConsoleUI.start(ConsoleUI.java:25)
 	at Application.main(Application.java:9)
 2026-03-28 18:13:14 [main] ERROR dao.EntityDAO - Ошибка при поиске пользователя по ID:
 jakarta.persistence.EntityNotFoundException: No entity of type `entity.UserEntity` existed for key `2`
 	at org.hibernate.internal.AbstractSharedSessionContract.notFound(AbstractSharedSessionContract.java:428)
 	at org.hibernate.internal.AbstractSharedSessionContract.get(AbstractSharedSessionContract.java:482)
 	at org.hibernate.internal.SessionImpl.get(SessionImpl.java:151)
-	at dao.UserDao.read(UserDao.java:35)
-	at console.ConsoleUI.readUser(ConsoleUI.java:79)
-	at console.ConsoleUI.start(ConsoleUI.java:25)
+	at dao.UserDAO.read(UserDao.java:35)
+	at controller.ConsoleUI.readUser(ConsoleUI.java:79)
+	at controller.ConsoleUI.start(ConsoleUI.java:25)
 	at Application.main(Application.java:9)
-2026-03-28 18:13:19 [main] INFO  console.ConsoleUI - Завершение работы приложения
+2026-03-28 18:13:19 [main] INFO  controller.ConsoleUI - Завершение работы приложения
 2026-03-28 18:13:32 [main] INFO  org.hibernate.orm.core - HHH000001: Hibernate ORM core version 8.0.0.Alpha1
 2026-03-28 18:13:32 [main] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
 2026-03-28 18:13:33 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
@@ -1284,9 +1284,9 @@ org.hibernate.HibernateException: Duplicate row was found and `ASSERT` was speci
 	at org.hibernate.internal.SessionImpl.find(SessionImpl.java:151)
 	at org.hibernate.internal.AbstractSharedSessionContract.get(AbstractSharedSessionContract.java:480)
 	at org.hibernate.internal.SessionImpl.get(SessionImpl.java:151)
-	at dao.UserDao.read(UserDao.java:35)
-	at console.ConsoleUI.readUser(ConsoleUI.java:79)
-	at console.ConsoleUI.start(ConsoleUI.java:25)
+	at dao.UserDAO.read(UserDao.java:35)
+	at controller.ConsoleUI.readUser(ConsoleUI.java:79)
+	at controller.ConsoleUI.start(ConsoleUI.java:25)
 	at Application.main(Application.java:9)
 2026-03-28 18:14:38 [main] INFO  org.hibernate.orm.core - HHH000001: Hibernate ORM core version 8.0.0.Alpha1
 2026-03-28 18:14:38 [main] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
@@ -1464,7 +1464,7 @@ org.hibernate.HibernateException: Duplicate row was found and `ASSERT` was speci
 	Maximum pool size: 20
 2026-03-28 22:41:59 [main] INFO  org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
 2026-03-28 22:41:59 [main] INFO  hibernate.HibernateUtil - Hibernate SessionFactory created successfully
-2026-03-28 22:42:10 [main] INFO  console.ConsoleUI - Завершение работы приложения
+2026-03-28 22:42:10 [main] INFO  controller.ConsoleUI - Завершение работы приложения
 2026-03-28 23:02:08 [main] INFO  org.hibernate.orm.core - HHH000001: Hibernate ORM core version 8.0.0.Alpha1
 2026-03-28 23:02:08 [main] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
 2026-03-28 23:02:08 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
@@ -1482,7 +1482,7 @@ org.hibernate.HibernateException: Duplicate row was found and `ASSERT` was speci
 	Maximum pool size: 20
 2026-03-28 23:02:09 [main] INFO  org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
 2026-03-28 23:02:09 [main] INFO  hibernate.HibernateUtil - Hibernate SessionFactory created successfully
-2026-03-28 23:02:23 [main] INFO  console.ConsoleUI - Завершение работы приложения
+2026-03-28 23:02:23 [main] INFO  controller.ConsoleUI - Завершение работы приложения
 2026-03-28 23:02:30 [main] INFO  org.hibernate.orm.core - HHH000001: Hibernate ORM core version 8.0.0.Alpha1
 2026-03-28 23:02:30 [main] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
 2026-03-28 23:02:30 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
@@ -1574,7 +1574,7 @@ org.hibernate.HibernateException: Duplicate row was found and `ASSERT` was speci
 2026-03-28 23:10:18 [main] WARN  org.hibernate.orm.jdbc.error - HHH000247: ErrorCode: 0, SQLState: 23505
 2026-03-28 23:10:18 [main] WARN  org.hibernate.orm.jdbc.error - ОШИБКА: повторяющееся значение ключа нарушает ограничение уникальности "users_email_key"
   Подробности: Ключ "(email)=(1)" уже существует.
-2026-03-28 23:24:38 [main] INFO  console.ConsoleUI - Завершение работы приложения
+2026-03-28 23:24:38 [main] INFO  controller.ConsoleUI - Завершение работы приложения
 2026-03-28 23:26:47 [main] INFO  org.hibernate.orm.core - HHH000001: Hibernate ORM core version 8.0.0.Alpha1
 2026-03-28 23:26:48 [main] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
 2026-03-28 23:26:48 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
@@ -1592,7 +1592,7 @@ org.hibernate.HibernateException: Duplicate row was found and `ASSERT` was speci
 	Maximum pool size: 20
 2026-03-28 23:26:49 [main] INFO  org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
 2026-03-28 23:26:49 [main] INFO  hibernate.HibernateUtil - Hibernate SessionFactory created successfully
-2026-03-28 23:26:54 [main] INFO  console.ConsoleUI - Завершение работы приложения
+2026-03-28 23:26:54 [main] INFO  controller.ConsoleUI - Завершение работы приложения
 2026-03-28 23:46:29 [main] INFO  org.hibernate.orm.core - HHH000001: Hibernate ORM core version 8.0.0.Alpha1
 2026-03-28 23:46:30 [main] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
 2026-03-28 23:46:30 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
@@ -1610,7 +1610,7 @@ org.hibernate.HibernateException: Duplicate row was found and `ASSERT` was speci
 	Maximum pool size: 20
 2026-03-28 23:46:30 [main] INFO  org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
 2026-03-28 23:46:30 [main] INFO  hibernate.HibernateUtil - Hibernate SessionFactory created successfully
-2026-03-28 23:46:34 [main] INFO  console.ConsoleUI - Завершение работы приложения
+2026-03-28 23:46:34 [main] INFO  controller.ConsoleUI - Завершение работы приложения
 2026-03-29 11:30:50 [main] INFO  org.hibernate.orm.core - HHH000001: Hibernate ORM core version 8.0.0.Alpha1
 2026-03-29 11:30:50 [main] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using built-in connection pool (not intended for production use)
 2026-03-29 11:30:50 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
@@ -1628,7 +1628,7 @@ org.hibernate.HibernateException: Duplicate row was found and `ASSERT` was speci
 	Maximum pool size: 20
 2026-03-29 11:30:51 [main] INFO  org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
 2026-03-29 11:30:51 [main] INFO  hibernate.HibernateUtil - Hibernate SessionFactory created successfully
-2026-03-29 11:38:00 [main] INFO  console.ConsoleUI - Завершение работы приложения
-2026-03-29 11:40:37 [main] INFO  console.ConsoleUI - Завершение работы приложения
-2026-03-29 15:35:22 [main] INFO  console.ConsoleUI - Завершение работы приложения
-2026-04-04 10:40:03 [main] INFO  console.ConsoleUI - Завершение работы приложения
+2026-03-29 11:38:00 [main] INFO  controller.ConsoleUI - Завершение работы приложения
+2026-03-29 11:40:37 [main] INFO  controller.ConsoleUI - Завершение работы приложения
+2026-03-29 15:35:22 [main] INFO  controller.ConsoleUI - Завершение работы приложения
+2026-04-04 10:40:03 [main] INFO  controller.ConsoleUI - Завершение работы приложения

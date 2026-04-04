@@ -68,6 +68,16 @@ public class UserEntity {
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
+    public UserEntity(String name, String email, int age) {
+
+    }
+
+    public UserEntity(String name, String email, Integer age) {
+        this.name = name;
+        this.email = email;
+        this.age = age;
+    }
+
     /**
      * Автоматически устанавливает дату создания перед сохранением сущности в базу данных.
      */

@@ -1,6 +1,7 @@
 package dao;
 
 import entity.UserEntity;
+import hibernate.HibernateSetup;
 import jakarta.persistence.PersistenceException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -10,8 +11,13 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.Optional;
 
-
-public class UserDao implements EntityDAO {
+/**
+ * Data Access Object (DAO) для работы с сущностями пользователей ({@link UserEntity}).
+ * <p>
+ * Предоставляет CRUD‑операции (Create, Read, Update, Delete)+ FindAll для взаимодействия
+ * с базой данных через Hibernate ORM. Все операции выполняются в рамках транзакций.
+ */
+public class UserDAO implements EntityDAO {
     private static final Logger logger = LoggerFactory.getLogger(EntityDAO.class);
     /**
      * Сохраняет новую сущность пользователя в базе данных.
