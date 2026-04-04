@@ -1,6 +1,6 @@
 package dao;
 
-import entity.User;
+import entity.UserEntity;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,13 +10,13 @@ import java.util.Optional;
  * и отображением всей БД.
  */
 public interface EntityDAO {
-    void create(User user);
+    void create(UserEntity userEntity);
 
-    Optional<User> read(Long id);
+    Optional<UserEntity> read(Long id);
 
-    void update(User user);
+    void update(UserEntity userEntity);
 
     void remove(Long id);
 
-    List<User> findAll();
+    List<UserEntity> findAll();
 }

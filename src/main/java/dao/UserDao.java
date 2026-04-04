@@ -1,13 +1,12 @@
 package dao;
 
-import entity.User;
+import entity.UserEntity;
+import jakarta.persistence.PersistenceException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,44 +26,42 @@ public class UserDao implements EntityDAO {
      * значит email занят, о чем сообщаем логгером
      */
     @Override
-    public void create(User user) {
+    public void create(UserEntity userEntity) {
         Transaction transaction = null;
         try (Session session = HibernateSetup.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            session.persist(user);
+            session.persist(userEntity);
             transaction.commit();
-            logger.info("Пользователь успешно создан: {}", user);
-        } catch (ConstraintViolationException e) {
-            if (transaction != null) {
+            logger.info("Пользователь успешно создан: {}", userEntity);
+        } catch (PersistenceException e) { // Hibernate оборачивает ошибки БД в PersistenceException
+            if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
             }
-            // Проверяем причину нарушения ограничения
-            Throwable rootCause = e.getCause();
-            while (rootCause != null && !(rootCause instanceof SQLIntegrityConstraintViolationException)) {
-                rootCause = rootCause.getCause();
-            }
-            if (rootCause != null) {
-                logger.error("Пользователь с email '{}' уже существует", user.getEmail());
+            // Проверяем на дубликаты (Unique Constraint)
+            if (e.getCause() instanceof org.hibernate.exception.ConstraintViolationException) {
+                String constraintName = ((org.hibernate.exception.ConstraintViolationException) e.getCause()).getConstraintName();
+                logger.error("Ошибка уникальности данных (ограничение: {}): {}", constraintName, e.getMessage());
+
                 throw new IllegalArgumentException(
-                        "Пользователь с email '" + user.getEmail() + "' уже существует", e);
-            } else {
-                logger.error("Нарушение ограничения целостности данных: ", e);
-                throw e;
+                        "Ошибка сохранения: данные уже существуют или нарушают правила системы", e);
             }
+
+            logger.error("Ошибка уровня Persistence при создании пользователя", e);
+            throw e;
         } catch (Exception e) {
-            if (transaction != null) {
+            if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
             }
-            logger.error("Ошибка при создании пользователя: ", e);
+            logger.error("Непредвиденная ошибка при создании пользователя: ", e);
             throw e;
         }
     }
 
     @Override
-    public Optional<User> read(Long id) {
+    public Optional<UserEntity> read(Long id) {
         try (Session session = HibernateSetup.getSessionFactory().openSession()) {
-            User user = session.get(User.class, id);
-            return Optional.ofNullable(user);
+            UserEntity userEntity = session.get(UserEntity.class, id);
+            return Optional.ofNullable(userEntity);
         } catch (Exception e) {
             logger.error("Ошибка при поиске пользователя по ID: ", e);
             throw e;
@@ -72,9 +69,9 @@ public class UserDao implements EntityDAO {
     }
 
     @Override
-    public List<User> findAll() {
+    public List<UserEntity> findAll() {
         try (Session session = HibernateSetup.getSessionFactory().openSession()) {
-            return session.createQuery("FROM User", User.class).getResultList();
+            return session.createQuery("FROM UserEntity", UserEntity.class).getResultList();
         } catch (Exception e) {
             logger.error("Ошибка при получении всех пользователей: ", e);
             throw e;
@@ -82,13 +79,13 @@ public class UserDao implements EntityDAO {
     }
 
     @Override
-    public void update(User user) {
+    public void update(UserEntity userEntity) {
         Transaction transaction = null;
         try (Session session = HibernateSetup.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            session.merge(user);
+            session.merge(userEntity);
             transaction.commit();
-            logger.info("Пользователь успешно обновлён: {}", user);
+            logger.info("Пользователь успешно обновлён: {}", userEntity);
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -103,9 +100,9 @@ public class UserDao implements EntityDAO {
         Transaction transaction = null;
         try (Session session = HibernateSetup.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            User user = session.get(User.class, id);
-            if (user != null) {
-                session.remove(user);
+            UserEntity userEntity = session.get(UserEntity.class, id);
+            if (userEntity != null) {
+                session.remove(userEntity);
                 logger.info("Пользователь с ID {} успешно удалён", id);
             } else {
                 logger.warn("Попытка удаления несуществующего пользователя с ID {}", id);
