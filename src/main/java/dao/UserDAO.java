@@ -4,10 +4,12 @@ import entity.UserEntity;
 import hibernate.HibernateSetup;
 import jakarta.persistence.PersistenceException;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,8 +19,17 @@ import java.util.Optional;
  * Предоставляет CRUD‑операции (Create, Read, Update, Delete)+ FindAll для взаимодействия
  * с базой данных через Hibernate ORM. Все операции выполняются в рамках транзакций.
  */
+
 public class UserDAO implements EntityDAO {
     private static final Logger logger = LoggerFactory.getLogger(EntityDAO.class);
+    private final SessionFactory sessionFactory;
+    public UserDAO(){
+        sessionFactory=null;
+    }
+
+    public UserDAO(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
     /**
      * Сохраняет новую сущность пользователя в базе данных.
      * <p>
@@ -73,7 +84,7 @@ public class UserDAO implements EntityDAO {
             return Optional.ofNullable(userEntity);
         } catch (Exception e) {
             logger.error("Ошибка при поиске пользователя по ID: ", e);
-            throw e;
+            return Optional.empty();
         }
     }
     /**
@@ -91,7 +102,7 @@ public class UserDAO implements EntityDAO {
             return session.createQuery("FROM UserEntity", UserEntity.class).getResultList();
         } catch (Exception e) {
             logger.error("Ошибка при получении всех пользователей: ", e);
-            throw e;
+            return new ArrayList<>();
         }
     }
     /**
@@ -121,7 +132,7 @@ public class UserDAO implements EntityDAO {
                 transaction.rollback();
             }
             logger.error("Ошибка при обновлении пользователя: ", e);
-            throw e;
+            return Optional.empty();
         }
     }
     /**
@@ -157,7 +168,7 @@ public class UserDAO implements EntityDAO {
                 transaction.rollback();
             }
             logger.error("Ошибка при удалении пользователя с ID {}: ", id, e);
-            throw e;
+            return Optional.empty();
         }
     }
 }
