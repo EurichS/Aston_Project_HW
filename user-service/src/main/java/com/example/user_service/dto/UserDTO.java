@@ -1,5 +1,6 @@
 package com.example.user_service.dto;
 
+import org.springframework.hateoas.RepresentationModel;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -9,16 +10,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
 import java.time.LocalDateTime;
-
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class UserDTO {
+public class UserDTO extends RepresentationModel<UserDTO> {
 
     @NotBlank(message = "Name should not be blank")
     private String name;
@@ -32,7 +31,6 @@ public class UserDTO {
     private Integer age;
 
     private LocalDateTime created_at;
-
     private LocalDateTime updated_at;
 
     public UserDTO(String name, String email, Integer age) {
@@ -40,5 +38,4 @@ public class UserDTO {
         this.email = email;
         this.age = age;
     }
-
 }
