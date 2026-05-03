@@ -62,6 +62,7 @@ public class UserService {
      * @ return     : java.util.Optional<com.example.user_service.dto.UserDTO>
      */
     @Transactional(readOnly = true)
+    @CircuitBreaker(name = "userService", fallbackMethod = "fallbackGetUser")
     public Optional<UserDTO> findUserById(Long id) throws UserNotFoundException {
         logger.info("Fetching user by ID: {}", id);
 
@@ -76,6 +77,10 @@ public class UserService {
         logger.debug("Successfully mapped user entity to DTO for ID: {}", id);
 
         return Optional.of(response);
+    }
+    public void fallbackGetUser(Long id, Throwable t) {
+        System.out.println("Circuit Breaker is OPEN. Returning fallback for user " + id);
+        return;
     }
 
     /**
