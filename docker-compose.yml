@@ -1,3 +1,10 @@
+version: '3.8'
+server:
+  port: 8081
+
+spring:
+  application:
+    name: user-service
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:7.7.8
@@ -27,14 +34,72 @@ services:
     ports:
       - "1025:1025"
       - "8025:8025"
-
-
-      server:
-        port: 8761
-
-      eureka:
-        client:
-          register-with-eureka: false
-          fetch-registry: false
-        server:
-          wait-time-in-ms-when-sync-empty: 0
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: user_db
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  eureka:
+    client:
+      register-with-eureka: false
+      fetch-registry: false
+    server:
+      wait-time-in-ms-when-sync-empty: 0
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    depends_on:
+      - user-service
+      - notification-service
+  service-discovery:
+    image: docker.io/library/consul:latest
+    ports:
+      - "8500:8500"
+      - "8600:8600/udp"
+    command: "agent -dev -client=0.0.0.0.0"
+  external-config:
+    image: springcloud/configserver:latest
+    ports:
+      - "8888:8888"
+    environment:
+      SPRING_PROFILES_ACTIVE: native
+      SERVER_PORT: 8888
+    volumes:
+      - ./config-repo:/config-repo
+  user-service:
+    build: ./user-service
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      CONFIG_SERVER_URI: http://external-config:8888
+      SERVICE_DISCOVERY_URI: http://service-discovery:8500
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      DB_HOST: postgres
+      DB_PORT: 5432
+    depends_on:
+      - external-config
+      - service-discovery
+      - kafka
+      - postgres
+  notification-service:
+    build: ./notification-service
+    ports:
+      - "8082:8082"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      CONFIG_SERVER_URI: http://external-config:8888
+      SERVICE_DISCOVERY_URI: http://service-discovery:8500
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+    depends_on:
+      - external-config
+      - service-discovery
+      - kafka
